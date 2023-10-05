@@ -1,0 +1,49 @@
+.floating-alert {
+  @include font-source(0.75rem, false, 500, false);
+
+  top: 50px;
+  right: 18px;
+  position: fixed;
+
+  gap: 10px;
+  @include flex(center, center);
+
+  padding: 5px 20px;
+  border-radius: 2px;
+
+  &-success {
+    background: $green-7;
+    color: $green-3;
+  }
+
+  &-error {
+    background: $red-5;
+    color: $red-1;
+  }
+
+  &-close {
+    margin-top: 0.15rem;
+    cursor: pointer;
+  }
+
+  &-text {
+    @include overflow-ellipsis();
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .floating-alert {
+    width: 100%;
+    position: relative;
+    right: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .floating-alert {
+    max-width: 90%;
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+  }
+}

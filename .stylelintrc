@@ -1,0 +1,13 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "indentation": [ 2, { "baseIndentLevel": 1}],
+    "declaration-block-semicolon-newline-after": "always"
+  }
+}

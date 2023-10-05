@@ -1,0 +1,99 @@
+@import 'src/styles/abstracts/mixins.scss';
+
+.tree-node {
+  @include flex(center, center);
+
+  min-width: 180px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background-color: $neutral;
+
+  margin: 0 50px;
+  pointer-events: all;
+  box-shadow: 0 4px 9px 0 $shadow-1;
+}
+
+.node-slot:hover {
+  .move-node,
+  .edit-node,
+  .clone-node,
+  .add-new-node,
+  .children-count {
+    display: inherit;
+  }
+}
+
+.children-count {
+  @include font-source(0.75rem);
+  font-weight: 700;
+
+  display: none;
+  position: absolute;
+  left: 36px;
+  bottom: 43px;
+}
+
+.add-new-node {
+  @include font-source(1rem);
+  font-weight: 600;
+
+  display: none;
+  position: absolute;
+  right: 37px;
+  bottom: 40px;
+}
+
+.edit-node {
+  @include font-source(0.75rem);
+  font-weight: 600;
+
+  display: none;
+  position: absolute;
+  right: 36px;
+  top: 45px;
+}
+
+.clone-node {
+  @include font-source(0.75rem);
+  font-weight: 600;
+
+  display: none;
+  position: absolute;
+  right: 63px;
+  top: 45px;
+}
+
+.move-node {
+  @include font-source(0.75rem);
+  font-weight: 600;
+
+  display: none;
+  position: absolute;
+  right: 90px;
+  top: 45px;
+}
+
+.show-children {
+  position: absolute;
+  top: 60%;
+
+  @include flex(center, center);
+
+  width: 36px;
+  padding: 5px;
+  border-radius: 100%;
+}
+
+.rotate180 {
+  transform: rotate(-180deg) !important;
+}
+
+.normal {
+  margin-top: 6px;
+}
+
+.text-icon {
+  @include font-source(0.75rem);
+  @include overflow-ellipsis();
+  max-width: 180px;
+}

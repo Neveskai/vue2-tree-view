@@ -1,0 +1,49 @@
+@charset 'UTF-8';
+@import 'abstracts/mixins', 'abstracts/variables';
+
+.tree-container .link {
+  opacity: 0.4 !important;
+}
+
+#treeview-page {
+  width: 100vw;
+  height: 100vh;
+
+  background-color: $neutral-8;
+}
+
+.d-flex {
+  display: flex;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+section,
+div,
+p,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}

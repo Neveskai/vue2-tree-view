@@ -1,0 +1,23 @@
+.d-flex {
+  @include flex();
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.text-image {
+  margin: auto;
+  height: 1.5rem;
+  margin-right: 0.35rem;
+}
+
+.text-image-label {
+  margin: auto;
+  padding-top: 2px;
+  @include overflow-ellipsis();
+  max-width: 15.625rem;
+}
+
+.item-label-tooltip {
+  padding: 5px 10px !important;
+  word-break: break-word;
+}

@@ -1,0 +1,28 @@
+.tree-loading {
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid $gray-color-2;
+  box-shadow: 0 4px 9px 0 $shadow-1;
+  background: $transparent;
+}
+
+.tree-loading__content {
+  @include flex-column(center, center);
+
+  width: 98vw;
+  height: 90vh;
+}
+
+.tree-loading__root {
+  width: 366px !important;
+}
+
+.tree-loading__node {
+  width: 266px !important;
+  margin-top: 80px;
+}
+
+// @extend
+.d-flex {
+  gap: 25px;
+}

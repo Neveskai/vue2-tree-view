@@ -1,0 +1,166 @@
+#vuetree {
+  user-select: none;
+}
+
+.tree-view-section {
+  margin: 0;
+  padding: 0;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.tree-view {
+  margin: 0;
+  padding: 0 20px 0 5px;
+  display: flex !important;
+  margin-top: 0.25vw;
+  margin-left: 0.2vw;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+}
+
+.drag-overlay {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $transparent;
+  z-index: 1000;
+  cursor: grab;
+}
+
+.content {
+  &-header {
+    &-actions {
+      &-button {
+        height: 22px;
+        padding: 6px;
+        margin-left: 2px;
+        cursor: pointer;
+        background-color: $neutral;
+        border: 1px solid $neutral-7;
+        border-radius: 4px;
+        box-shadow: 0 4px 9px 0 $shadow-1;
+        transition: background-color 0.2s, box-shadow 0.2s;
+      }
+
+      &-button:hover {
+        background-color: $neutral-9;
+        box-shadow: 0 4px 9px 0 $shadow-3;
+      }
+
+      &-input {
+        width: 40px;
+        height: 22px;
+        padding: 6px;
+        margin-left: 2px;
+        background-color: $neutral;
+        border: 1px solid $neutral-7;
+        border-radius: 4px;
+        box-shadow: 0 4px 9px 0 $shadow-1;
+        transition: background-color 0.2s, box-shadow 0.2s;
+        font-size: 0.625em;
+        font-weight: 400;
+        line-height: 1em;
+        letter-spacing: 0;
+      }
+    }
+  }
+
+  &-tree {
+    margin-left: 0.5vw;
+    width: 98vw;
+    height: 98vh;
+
+    &-node {
+      cursor: default;
+    }
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+.grab {
+  cursor: grab;
+}
+
+.grabbing {
+  cursor: grabbing;
+}
+
+.filter-blur {
+  filter: blur(0.5rem);
+}
+
+.overlay {
+  &-text {
+    @include font-source(1rem, $neutral-1, 400, 1.5rem);
+    letter-spacing: 0;
+    text-align: center;
+
+    &-bold {
+      font-weight: 500;
+    }
+
+    &-highlight {
+      @include font-source(0.875rem, $status, 500, 1.125rem);
+      letter-spacing: 0;
+      text-align: center;
+    }
+
+    &-button {
+      @include font-source(0.75rem, $neutral, 600, 1.125rem);
+      letter-spacing: 0;
+      text-align: left;
+    }
+  }
+}
+
+.text-modal-shortcut {
+  @include font-source(1rem, $neutral-1, 500, false);
+  padding-left: 1.94rem;
+  padding-right: 4.13rem;
+
+  .shortcut {
+    @include flex(center, center);
+    justify-content: space-between;
+    margin-bottom: 1.13rem;
+
+    &-keys {
+      display: flex;
+    }
+
+    &-first-key,
+    &-second-key {
+      padding: 10px 16px;
+      border: 1px solid $neutral-7;
+      border-radius: 6px;
+      box-shadow: 0 4px 9px $shadow-1;
+    }
+
+    &-first-key {
+      margin-right: 0.687rem;
+      background-color: $neutral-9;
+    }
+
+    &-second-key {
+      background-color: $neutral;
+    }
+  }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
