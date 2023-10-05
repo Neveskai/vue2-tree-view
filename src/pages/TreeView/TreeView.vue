@@ -32,7 +32,8 @@
     </TreeView>
 
     <FloatingAlert ref="alertBar" />
-    <EditNode ref="modal" />
+    <CloneNode ref="cloneModal" />
+    <EditNode ref="editModal" />
   </div>
 </template>
 <script>
@@ -40,6 +41,7 @@ import QuickNewNode from './components/QuickNewNode/QuickNewNode.vue'
 import TreeSearch from './components/TreeSearch/TreeSearch.vue'
 import TreeNode from './components/TreeNode/TreeNode.vue'
 import EditNode from './components/EditNode/EditNode.vue'
+import CloneNode from './components/CloneNode/CloneNode.vue'
 
 import ZoomController from '@/components/TreeView/parts/ZoomController.vue'
 import FloatingAlert from '@/components/FloatingAlert/FloatingAlert.vue'
@@ -51,12 +53,24 @@ export default {
   name: 'TreeViewPage',
   components: {
     EditNode,
+    CloneNode,
     TreeView,
     TreeNode,
     TreeSearch,
     QuickNewNode,
     ZoomController,
     FloatingAlert,
+  },
+  computed: {
+    _tree() {
+      return this.$refs.tree
+    },
+    _editModal() {
+      return this.$refs.editModal
+    },
+    _cloneModal() {
+      return this.$refs.cloneModal
+    },
   },
   data() {
     return {
@@ -118,24 +132,27 @@ export default {
       }
     },
     editNode(refNode) {
-      const node = this.$refs.modal.open({ ...refNode })
+      const node = { ...refNode }
 
-      node.cancel = () => this.$refs.modal.close()
+      this._editModal.open(node)
+
       node.success = newNode => {
         this.$refs.tree.editNode(newNode, refNode)
         this.treeAlerts('edit', 'success', refNode)
       }
     },
     cloneNode(refNode) {
-      const node = this.$refs.modal.open({ ...refNode })
+      const node = { ...refNode }
 
-      node.cancel = () => this.$refs.modal.close()
+      this._cloneModal.open(node)
+
       node.success = () => {}
     },
     moveNode(refNode) {
-      const node = this.$refs.modal.open({ ...refNode })
+      const node = { ...refNode }
 
-      node.cancel = () => this.$refs.modal.close()
+      this._moveModal.open(node)
+
       node.success = () => {}
     },
     initTreeSearch() {
@@ -146,11 +163,6 @@ export default {
     },
     help() {
       console.log('help')
-    },
-  },
-  computed: {
-    _tree() {
-      return this.$refs.tree
     },
   },
 }

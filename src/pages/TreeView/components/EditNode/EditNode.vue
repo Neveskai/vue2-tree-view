@@ -3,7 +3,7 @@
     <div class="modal-header">
       <h3>Editar</h3>
 
-      <v-btn @click="node.cancel" icon x-small>
+      <v-btn @click="close" icon x-small>
         <v-icon x-small v-text="'fi-br-cross'" />
       </v-btn>
     </div>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="actions">
-      <button @click="node.cancel" icon x-small>
+      <button @click="close" icon x-small>
         Cancelar <v-icon x-small v-text="'fi-br-cross'" />
       </button>
 
