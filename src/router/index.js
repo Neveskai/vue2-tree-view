@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import TreeView from '../pages/TreeView.vue'
+import TreeView from '../pages/TreeView/TreeView.vue'
 
 Vue.use(VueRouter)
 

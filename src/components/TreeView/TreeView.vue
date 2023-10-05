@@ -52,7 +52,7 @@
 <script>
 import vue from 'vue'
 import VueTree from '@ssthouse/vue-tree-chart'
-import TreeLoading from '@/components/TreeLoading/TreeLoading.vue'
+import TreeLoading from './parts/TreeLoading/TreeLoading.vue'
 import { v4 as uuid } from 'uuid'
 
 VueTree.computed = null

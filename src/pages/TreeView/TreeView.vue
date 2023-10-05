@@ -32,24 +32,25 @@
     </TreeView>
 
     <FloatingAlert ref="alertBar" />
-    <Modal ref="modal" />
+    <EditNode ref="modal" />
   </div>
 </template>
 <script>
-import QuickNewNode from '@/components/QuickNewNode/QuickNewNode.vue'
-import TreeNode from '@/components/TreeNode/TreeNode.vue'
-import TreeView from '@/components/TreeView/TreeView.vue'
-import TreeSearch from '@/components/TreeSearch/TreeSearch.vue'
-import FloatingAlert from '@/components/FloatingAlert/FloatingAlert.vue'
+import QuickNewNode from './components/QuickNewNode/QuickNewNode.vue'
+import TreeSearch from './components/TreeSearch/TreeSearch.vue'
+import TreeNode from './components/TreeNode/TreeNode.vue'
+import EditNode from './components/EditNode/EditNode.vue'
+
 import ZoomController from '@/components/TreeView/parts/ZoomController.vue'
-import Modal from '@/components/Modal/Modal.vue'
+import FloatingAlert from '@/components/FloatingAlert/FloatingAlert.vue'
+import TreeView from '@/components/TreeView/TreeView.vue'
 
 import { tree } from '@/__mocks__/TableTree.js'
 
 export default {
   name: 'TreeViewPage',
   components: {
-    Modal,
+    EditNode,
     TreeView,
     TreeNode,
     TreeSearch,
