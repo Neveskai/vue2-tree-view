@@ -10,12 +10,16 @@
       <i class="fi-br-pencil"></i>
     </div>
 
-    <div class="move-node" @click="handleAction('move')">
+    <div class="clone-node" @click="handleAction('clone')">
+      <i class="fi-br-copy-alt"></i>
+    </div>
+
+    <div class="move-node" @click="handleAction('move')" v-if="!node.root">
       <i class="fi-br-exchange"></i>
     </div>
 
-    <div class="clone-node" @click="handleAction('clone')">
-      <i class="fi-br-copy-alt"></i>
+    <div class="delete-node" @click="handleAction('delete')" v-if="!node.root">
+      <i class="fi-br-trash"></i>
     </div>
 
     <div

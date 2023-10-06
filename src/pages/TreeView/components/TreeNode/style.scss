@@ -17,6 +17,7 @@
   .move-node,
   .edit-node,
   .clone-node,
+  .delete-node,
   .add-new-node,
   .children-count {
     display: inherit;
@@ -43,17 +44,7 @@
   bottom: 40px;
 }
 
-.edit-node {
-  @include font-source(0.75rem);
-  font-weight: 600;
-
-  display: none;
-  position: absolute;
-  right: 36px;
-  top: 45px;
-}
-
-.clone-node {
+.node-action {
   @include font-source(0.75rem);
   font-weight: 600;
 
@@ -63,22 +54,33 @@
   top: 45px;
 }
 
-.move-node {
-  @include font-source(0.75rem);
-  font-weight: 600;
+$spacing: 27px;
 
-  display: none;
-  position: absolute;
-  right: 90px;
-  top: 45px;
+.edit-node {
+  @extend .node-action;
+  right: 36px;
+}
+
+.clone-node {
+  @extend .node-action;
+  right: 61px;
+}
+
+.move-node {
+  @extend .node-action;
+  right: 85px;
+}
+
+.delete-node {
+  @extend .node-action;
+  right: 109px;
 }
 
 .show-children {
-  position: absolute;
-  top: 60%;
-
   @include flex(center, center);
 
+  position: absolute;
+  top: 60%;
   width: 36px;
   padding: 5px;
   border-radius: 100%;

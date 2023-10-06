@@ -243,7 +243,7 @@ export default {
 
       return children
     },
-    insertCopy(copy, target, newQuickNode = false) {
+    insertCopy(copy, target, moveCam = false) {
       const children = this.getChildrenRef(target)
 
       copy = this.realDeepCopy(copy)
@@ -253,7 +253,7 @@ export default {
       this._draw()
       setTimeout(() => {
         this._draw()
-        if (newQuickNode) {
+        if (moveCam) {
           if (target.id !== null && !target?.children.length)
             this.toggleChildren(target, false)
           this.centerNodeOnScreen(copy)
@@ -301,18 +301,22 @@ export default {
 
       this._draw()
     },
-    moveNode(node, targetNode, moveCam = true) {
+    moveNode(node, target, moveCam = true) {
       this.removeNode(node)
 
-      const children = this.getChildrenRef(targetNode)
+      const children = this.getChildrenRef(target)
 
-      node._parent = targetNode
+      node._parent = target
       children.push(node)
 
       this._draw()
       setTimeout(() => {
         this._draw()
-        if (moveCam) this.centerNodeOnScreen(node)
+        if (moveCam) {
+          if (target.id !== null && !target?.children.length)
+            this.toggleChildren(target, false)
+          this.centerNodeOnScreen(node)
+        }
       }, 400)
     },
     editNode(editedNode, targetNode) {

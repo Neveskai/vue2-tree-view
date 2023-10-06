@@ -131,7 +131,7 @@ export default {
       node.cancel = () => this.$refs.tree.removeNode(node)
       node.success = newNode => {
         newNode.childrenCount = 0
-        refNode.childrenCount = refNode.childrenCount + 1
+        refNode.childrenCount += 1
 
         this.$refs.tree.overrideNode(newNode, node)
         this.treeAlerts('add', 'success', node)
@@ -153,7 +153,8 @@ export default {
       this._cloneModal.open(node)
 
       node.success = cloneTarget => {
-        this.$refs.tree.insertCopy(node, cloneTarget)
+        cloneTarget.childrenCount += 1
+        this.$refs.tree.insertCopy(node, cloneTarget, true)
       }
     },
     moveNode(refNode) {
@@ -162,7 +163,9 @@ export default {
       this._moveModal.open(node)
 
       node.success = moveTarget => {
-        this.$refs.tree.moveNode(refNode, moveTarget, false)
+        refNode.childrenCount -= 1
+        moveTarget.childrenCount += 1
+        this.$refs.tree.moveNode(refNode, moveTarget, true)
       }
     },
     initTreeSearch() {
