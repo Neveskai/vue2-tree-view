@@ -12,13 +12,20 @@ export const uuid = length => {
   return result
 }
 
-const flatten = (children, extractChildren) =>
-  Array.prototype.concat.apply(
-    children,
-    children?.map(x => flatten(extractChildren(x) || [], extractChildren))
-  )
+export const flatten = (children, extractChildren, originOfMove = null) => {
+  if (originOfMove)
+    children = children.filter(node => node.id !== originOfMove.id)
 
-const extractChildren = x => x.children
+  return Array.prototype.concat.apply(
+    children,
+    children?.map(x =>
+      flatten(extractChildren(x) || [], extractChildren, originOfMove)
+    )
+  )
+}
+
+export const extractChildren = x =>
+  x?._children?.length ? x._children : x.children
 
 export const tree = [
   {
@@ -117,8 +124,3 @@ export const tree = [
     ],
   },
 ]
-
-export const flatTree = flatten(
-  extractChildren({ children: tree }),
-  extractChildren
-)

@@ -1,7 +1,7 @@
 <template>
   <ModalVue ref="modal">
     <div class="modal-header">
-      <h3>Clonar</h3>
+      <h3>Mover</h3>
 
       <v-btn @click="close" icon x-small>
         <v-icon x-small v-text="'fi-br-cross'" />
@@ -22,7 +22,7 @@
         Cancelar <v-icon x-small v-text="'fi-br-cross'" />
       </button>
 
-      <button @click="handleCopy" icon x-small>
+      <button @click="handleMove" icon x-small>
         Salvar <v-icon x-small v-text="'fi-br-check'" />
       </button>
     </div>
@@ -31,17 +31,17 @@
 <script>
 import ModalVue from '@/components/Modal/Modal.vue'
 import SelectVue from '@/components/VueSelect/VueSelect.vue'
-import { tree, flatten, extractChildren, uuid } from '@/__mocks__/TableTree'
+import { tree, flatten, extractChildren } from '@/__mocks__/TableTree'
 
 export default {
-  name: 'EditNode',
+  name: 'MoveNode',
   components: {
     ModalVue,
     SelectVue,
   },
   data() {
     return {
-      nodeToClone: null,
+      nodeToMove: null,
       target: {},
       options: [],
     }
@@ -52,29 +52,25 @@ export default {
     },
   },
   methods: {
-    handleCopy() {
-      this.nodeToClone.children = []
-      this.nodeToClone._children = []
-      this.nodeToClone.childrenCount = 0
-      this.nodeToClone.id = uuid(40)
-
-      this.nodeToClone.success(this.target)
+    handleMove() {
+      this.nodeToMove.success(this.target)
       this.modal.close()
     },
     onChange(selected) {
       this.target = selected !== null ? selected : {}
     },
-    open(nodeToClone) {
-      this.nodeToClone = nodeToClone
+    open(nodeToMove) {
+      this.nodeToMove = nodeToMove
       this.options = flatten(
         extractChildren({ children: tree }),
-        extractChildren
+        extractChildren,
+        this.nodeToMove
       )
 
       this.modal.open()
     },
     close() {
-      this.nodeToClone = null
+      this.nodeToMove = null
       this.modal.close()
     },
   },

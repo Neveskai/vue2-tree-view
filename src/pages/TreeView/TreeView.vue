@@ -34,6 +34,7 @@
     <FloatingAlert ref="alertBar" />
     <CloneNode ref="cloneModal" />
     <EditNode ref="editModal" />
+    <MoveNode ref="moveModal" />
   </div>
 </template>
 <script>
@@ -42,6 +43,7 @@ import TreeSearch from './components/TreeSearch/TreeSearch.vue'
 import TreeNode from './components/TreeNode/TreeNode.vue'
 import EditNode from './components/EditNode/EditNode.vue'
 import CloneNode from './components/CloneNode/CloneNode.vue'
+import MoveNode from './components/MoveNode/MoveNode.vue'
 
 import ZoomController from '@/components/TreeView/parts/ZoomController.vue'
 import FloatingAlert from '@/components/FloatingAlert/FloatingAlert.vue'
@@ -53,6 +55,7 @@ export default {
   name: 'TreeViewPage',
   components: {
     EditNode,
+    MoveNode,
     CloneNode,
     TreeView,
     TreeNode,
@@ -70,6 +73,9 @@ export default {
     },
     _cloneModal() {
       return this.$refs.cloneModal
+    },
+    _moveModal() {
+      return this.$refs.moveModal
     },
   },
   data() {
@@ -155,7 +161,9 @@ export default {
 
       this._moveModal.open(node)
 
-      node.success = () => {}
+      node.success = moveTarget => {
+        this.$refs.tree.moveNode(refNode, moveTarget, false)
+      }
     },
     initTreeSearch() {
       const submit = async () => {}
