@@ -9,25 +9,29 @@
     </div>
 
     <SelectVue
-      label="Nó de Destino"
+      label="Nó destino"
+      optValue="id"
+      optLabel="name"
       :value="target"
-      :onChange="onSelectNode"
       :options="options"
+      :onChange="onChange"
     />
 
-    <SelectVue
-      label="Nó de Destino"
-      :value="target"
-      :onChange="onSelectNode"
-      :options="options"
-    />
+    <div class="actions">
+      <button @click="close" icon x-small>
+        Cancelar <v-icon x-small v-text="'fi-br-cross'" />
+      </button>
+
+      <button @click="handleCopy" icon x-small>
+        Salvar <v-icon x-small v-text="'fi-br-check'" />
+      </button>
+    </div>
   </ModalVue>
 </template>
 <script>
 import ModalVue from '@/components/Modal/Modal.vue'
 import SelectVue from '@/components/VueSelect/VueSelect.vue'
-
-const DEFAULT_NODE = { name: '', image: null }
+import { flatTree, uuid } from '@/__mocks__/TableTree'
 
 export default {
   name: 'EditNode',
@@ -37,13 +41,9 @@ export default {
   },
   data() {
     return {
-      node: DEFAULT_NODE,
-      target: { value: null, label: null },
-      options: [
-        { value: 'value0', label: 'label0' },
-        { value: 'value1', label: 'label1' },
-        { value: 'value2', label: 'label2' },
-      ],
+      nodeToClone: null,
+      target: {},
+      options: flatTree,
     }
   },
   computed: {
@@ -52,15 +52,27 @@ export default {
     },
   },
   methods: {
-    onSelectNode() {},
-    open() {
+    handleCopy() {
+      this.nodeToClone.children = []
+      this.nodeToClone._children = []
+      this.nodeToClone.childrenCount = 0
+      this.nodeToClone.id = uuid(40)
+
+      this.nodeToClone.success(this.target)
+      this.modal.close()
+    },
+    onChange(selected) {
+      this.target = selected !== null ? selected : {}
+    },
+    open(nodeToClone) {
+      this.nodeToClone = nodeToClone
       this.modal.open()
     },
     close() {
+      this.nodeToClone = null
       this.modal.close()
     },
   },
 }
 </script>
-
 <style src="./style.scss" lang="scss" scoped />

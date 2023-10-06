@@ -1,7 +1,7 @@
 import moment from 'moment'
 import catSvg from '@/__mocks__/cat.svg'
 
-const uuid = length => {
+export const uuid = length => {
   let result = ''
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   const charsLength = chars.length
@@ -12,11 +12,13 @@ const uuid = length => {
   return result
 }
 
-export const searchOptions = {
-  searchable: true,
-  path: ['name'],
-  placeholder: '',
-}
+const flatten = (children, extractChildren) =>
+  Array.prototype.concat.apply(
+    children,
+    children?.map(x => flatten(extractChildren(x) || [], extractChildren))
+  )
+
+const extractChildren = x => x.children
 
 export const tree = [
   {
@@ -29,7 +31,7 @@ export const tree = [
     childrenCount: 4,
     children: [
       {
-        id: uuid(20),
+        id: uuid(40),
         name: 'Wendell e Daniele',
         image: catSvg,
         inactive: true,
@@ -37,7 +39,7 @@ export const tree = [
         childrenCount: 1,
         children: [
           {
-            id: uuid(20),
+            id: uuid(40),
             name: 'Henri',
             image: catSvg,
             inactive: true,
@@ -48,7 +50,7 @@ export const tree = [
         ],
       },
       {
-        id: uuid(20),
+        id: uuid(40),
         name: 'Michelly e Peterson',
         image: catSvg,
         inactive: false,
@@ -56,7 +58,7 @@ export const tree = [
         childrenCount: 2,
         children: [
           {
-            id: uuid(20),
+            id: uuid(40),
             name: 'Nicolly',
             image: catSvg,
             inactive: true,
@@ -65,7 +67,7 @@ export const tree = [
             children: [],
           },
           {
-            id: uuid(20),
+            id: uuid(40),
             name: 'Nicolas',
             image: catSvg,
             inactive: true,
@@ -76,7 +78,7 @@ export const tree = [
         ],
       },
       {
-        id: uuid(20),
+        id: uuid(40),
         name: 'Ulisses e Monique',
         image: catSvg,
         inactive: false,
@@ -84,7 +86,7 @@ export const tree = [
         childrenCount: 2,
         children: [
           {
-            id: uuid(20),
+            id: uuid(40),
             name: 'Ian',
             image: catSvg,
             inactive: true,
@@ -93,7 +95,7 @@ export const tree = [
             children: [],
           },
           {
-            id: uuid(20),
+            id: uuid(40),
             name: 'Estevão',
             image: catSvg,
             inactive: true,
@@ -104,7 +106,7 @@ export const tree = [
         ],
       },
       {
-        id: uuid(20),
+        id: uuid(40),
         name: 'Wallace',
         image: catSvg,
         inactive: true,
@@ -116,8 +118,7 @@ export const tree = [
   },
 ]
 
-export const props = {
-  searchOptions: searchOptions,
-  loading: false,
-  tree: tree,
-}
+export const flatTree = flatten(
+  extractChildren({ children: tree }),
+  extractChildren
+)

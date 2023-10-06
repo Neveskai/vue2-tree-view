@@ -1,0 +1,21 @@
+::v-deep .v-menu__content {
+  left: 0;
+  top: 100%;
+  margin-top: 45px;
+  transform-origin: left bottom;
+  position: absolute;
+}
+
+::v-deep .v-label.v-label--active {
+  left: -20px !important;
+  margin-top: -4px;
+  font-size: 13px;
+}
+
+::v-deep .v-label {
+  color: #222 !important;
+}
+
+.select-vue {
+  width: 100%;
+}

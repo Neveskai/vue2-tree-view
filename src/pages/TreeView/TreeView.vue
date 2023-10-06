@@ -146,7 +146,9 @@ export default {
 
       this._cloneModal.open(node)
 
-      node.success = () => {}
+      node.success = cloneTarget => {
+        this.$refs.tree.insertCopy(node, cloneTarget)
+      }
     },
     moveNode(refNode) {
       const node = { ...refNode }
