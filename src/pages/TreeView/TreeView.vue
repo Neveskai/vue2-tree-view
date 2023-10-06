@@ -154,7 +154,9 @@ export default {
 
       node.success = cloneTarget => {
         cloneTarget.childrenCount += 1
+
         this.$refs.tree.insertCopy(node, cloneTarget, true)
+        this.treeAlerts('clone', 'success', refNode)
       }
     },
     moveNode(refNode) {
@@ -165,7 +167,22 @@ export default {
       node.success = moveTarget => {
         refNode.childrenCount -= 1
         moveTarget.childrenCount += 1
+
         this.$refs.tree.moveNode(refNode, moveTarget, true)
+        this.treeAlerts('move', 'success', refNode)
+      }
+    },
+    deleteNode(refNode) {
+      const node = { ...refNode }
+
+      this._deleteModal.open(node)
+
+      node.success = () => {
+        const parent = this.$refs.tree.removeNode(refNode)
+
+        parent.childrenCount -= 1
+
+        this.treeAlerts('delete', 'success', refNode)
       }
     },
     initTreeSearch() {
