@@ -407,7 +407,7 @@ export default {
     centerNodeOnScreen(node) {
       const nodeDataList = this.$refs.tree.nodeDataList
       const nodePosition = nodeDataList.find(
-        d3node => d3node.data._key === node._key
+        d3node => d3node.data._key === node?._key
       )
 
       const px = -nodePosition?.x + window.innerWidth / 2

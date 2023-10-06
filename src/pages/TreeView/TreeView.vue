@@ -2,14 +2,22 @@
   <div id="treeview-page" class="overflow-hidden">
     <TreeView
       ref="tree"
-      :tree="tree"
+      :tree="search.target.id ? search.target : tree"
       :hooks="hooks"
       :config="treeConfig"
       :loading="loading"
       class="mt-1"
     >
       <template v-slot:search>
-        <TreeSearch ref="treeSearch" v-bind="searchConfig" />
+        <div @click="getSearchOptions" style="height: 46px">
+          <SelectVue
+            label="Pesquise um Nó"
+            optValue="id"
+            optLabel="name"
+            :options="search.options"
+            :onChange="setSearchNode"
+          />
+        </div>
       </template>
 
       <template v-slot:zoom="{ zoomScale }">
@@ -32,15 +40,14 @@
     </TreeView>
 
     <FloatingAlert ref="alertBar" />
+    <DeleteNode ref="deleteModal" />
     <CloneNode ref="cloneModal" />
     <EditNode ref="editModal" />
     <MoveNode ref="moveModal" />
-    <DeleteNode ref="deleteModal" />
   </div>
 </template>
 <script>
 import QuickNewNode from './components/QuickNewNode/QuickNewNode.vue'
-import TreeSearch from './components/TreeSearch/TreeSearch.vue'
 import TreeNode from './components/TreeNode/TreeNode.vue'
 import EditNode from './components/EditNode/EditNode.vue'
 import CloneNode from './components/CloneNode/CloneNode.vue'
@@ -50,8 +57,9 @@ import DeleteNode from './components/DeleteNode/DeleteNode.vue'
 import ZoomController from '@/components/TreeView/parts/ZoomController.vue'
 import FloatingAlert from '@/components/FloatingAlert/FloatingAlert.vue'
 import TreeView from '@/components/TreeView/TreeView.vue'
+import SelectVue from '@/components/VueSelect/VueSelect.vue'
 
-import { tree } from '@/__mocks__/TableTree.js'
+import { extractChildren, flatten, tree } from '@/__mocks__/TableTree.js'
 
 export default {
   name: 'TreeViewPage',
@@ -62,7 +70,7 @@ export default {
     DeleteNode,
     TreeView,
     TreeNode,
-    TreeSearch,
+    SelectVue,
     QuickNewNode,
     ZoomController,
     FloatingAlert,
@@ -90,7 +98,10 @@ export default {
       treeConfig: { nodeWidth: 260, nodeHeight: 180, levelHeight: 220 },
       loading: true,
       hooks: {},
-      searchConfig: {},
+      search: {
+        target: {},
+        options: [],
+      },
     }
   },
   mounted() {
@@ -99,6 +110,11 @@ export default {
     setTimeout(() => {
       this.loading = false
     }, 500)
+  },
+  provide() {
+    return {
+      tree: this.tree,
+    }
   },
   methods: {
     treeActions(act, refNode = null) {
@@ -130,6 +146,25 @@ export default {
       }
 
       this.$refs.alertBar.displayAlert(config)
+    },
+    setSearchNode(node) {
+      this.loading = true
+
+      this.search.target = node === null ? {} : node
+
+      setTimeout(() => {
+        this.$refs.tree?.resetTree()
+      }, 200)
+
+      setTimeout(() => {
+        this.loading = false
+      }, 800)
+    },
+    getSearchOptions() {
+      this.search.options = flatten(
+        extractChildren({ children: this.tree }),
+        extractChildren
+      )
     },
     addQuickNewNode(refNode) {
       const node = this.$refs.tree.insertCopy(
@@ -195,20 +230,9 @@ export default {
         this.treeAlerts('delete', 'success', refNode)
       }
     },
-    initTreeSearch() {
-      const submit = async () => {}
-      const search = async () => {}
-
-      return { submit, search }
-    },
     help() {
       console.log('help')
     },
-  },
-  provide() {
-    return {
-      tree: this.tree,
-    }
   },
 }
 </script>

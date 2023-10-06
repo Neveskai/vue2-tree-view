@@ -1,6 +1,6 @@
 <template>
   <div data-app class="select-vue">
-    <v-select
+    <v-autocomplete
       @change="onChange"
       :items="options"
       :label="label"
@@ -11,7 +11,7 @@
       outlined
       clearable
       return-object
-    ></v-select>
+    ></v-autocomplete>
   </div>
 </template>
 <script>
@@ -24,7 +24,7 @@ export default {
     },
     value: {
       type: Object,
-      required: true,
+      default: () => {},
     },
     onChange: {
       type: Function,
