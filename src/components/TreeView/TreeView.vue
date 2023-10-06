@@ -300,6 +300,8 @@ export default {
       children.splice(childIndex, 1)
 
       this._draw()
+
+      return node._parent
     },
     moveNode(node, target, moveCam = true) {
       this.removeNode(node)

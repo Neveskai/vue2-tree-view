@@ -31,7 +31,7 @@
 <script>
 import ModalVue from '@/components/Modal/Modal.vue'
 import SelectVue from '@/components/VueSelect/VueSelect.vue'
-import { tree, flatten, extractChildren, uuid } from '@/__mocks__/TableTree'
+import { flatten, extractChildren, uuid } from '@/__mocks__/TableTree'
 
 export default {
   name: 'EditNode',
@@ -39,6 +39,7 @@ export default {
     ModalVue,
     SelectVue,
   },
+  inject: ['tree'],
   data() {
     return {
       nodeToClone: null,
@@ -67,7 +68,7 @@ export default {
     open(nodeToClone) {
       this.nodeToClone = nodeToClone
       this.options = flatten(
-        extractChildren({ children: tree }),
+        extractChildren({ children: this.tree }),
         extractChildren
       )
 

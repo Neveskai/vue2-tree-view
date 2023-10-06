@@ -1,5 +1,5 @@
 .floating-alert {
-  @include font-source(0.75rem, false, 500, false);
+  @include font-source(0.8rem, false, 500, false);
 
   top: 50px;
   right: 18px;
@@ -9,11 +9,11 @@
   @include flex(center, center);
 
   padding: 5px 20px;
-  border-radius: 2px;
+  border-radius: 6px;
 
   &-success {
-    background: $green-7;
-    color: $green-3;
+    background: $green-3;
+    color: $neutral;
   }
 
   &-error {

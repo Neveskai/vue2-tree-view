@@ -35,6 +35,7 @@
     <CloneNode ref="cloneModal" />
     <EditNode ref="editModal" />
     <MoveNode ref="moveModal" />
+    <DeleteNode ref="deleteModal" />
   </div>
 </template>
 <script>
@@ -44,6 +45,7 @@ import TreeNode from './components/TreeNode/TreeNode.vue'
 import EditNode from './components/EditNode/EditNode.vue'
 import CloneNode from './components/CloneNode/CloneNode.vue'
 import MoveNode from './components/MoveNode/MoveNode.vue'
+import DeleteNode from './components/DeleteNode/DeleteNode.vue'
 
 import ZoomController from '@/components/TreeView/parts/ZoomController.vue'
 import FloatingAlert from '@/components/FloatingAlert/FloatingAlert.vue'
@@ -57,6 +59,7 @@ export default {
     EditNode,
     MoveNode,
     CloneNode,
+    DeleteNode,
     TreeView,
     TreeNode,
     TreeSearch,
@@ -76,6 +79,9 @@ export default {
     },
     _moveModal() {
       return this.$refs.moveModal
+    },
+    _deleteModal() {
+      return this.$refs.deleteModal
     },
   },
   data() {
@@ -103,14 +109,18 @@ export default {
         edit: this.editNode,
         move: this.moveNode,
         clone: this.cloneNode,
+        delete: this.deleteNode,
       }
 
       return actions[act](refNode)
     },
     treeAlerts(act, status, node) {
       const messages = {
-        add: { messagePrefix: this.$t('added') },
-        edit: { messagePrefix: this.$t('edited') },
+        add: { messagePrefix: 'Nó adicionado com sucesso' },
+        edit: { messagePrefix: 'Dados salvos' },
+        move: { messagePrefix: 'Nó reposicionado com sucesso' },
+        clone: { messagePrefix: 'Nó clonado com sucesso' },
+        delete: { messagePrefix: 'Nó excluido com sucesso' },
       }
 
       const config = {
@@ -165,8 +175,8 @@ export default {
       this._moveModal.open(node)
 
       node.success = moveTarget => {
-        refNode.childrenCount -= 1
         moveTarget.childrenCount += 1
+        refNode._parent.childrenCount -= 1
 
         this.$refs.tree.moveNode(refNode, moveTarget, true)
         this.treeAlerts('move', 'success', refNode)
@@ -194,6 +204,11 @@ export default {
     help() {
       console.log('help')
     },
+  },
+  provide() {
+    return {
+      tree: this.tree,
+    }
   },
 }
 </script>

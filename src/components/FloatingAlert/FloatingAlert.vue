@@ -1,11 +1,11 @@
 <template>
   <div id="floating-alert" v-if="visible">
     <div class="floating-alert" :class="`floating-alert-${alert.type}`">
+      <span class="floating-alert-text">{{ alert.messagePrefix }}</span>
       <i
         @click="visible = false"
         class="mr-2 floating-alert-close fi fi-rr-cross-circle"
       ></i>
-      <span class="floating-alert-text">{{ alert.messagePrefix }}</span>
     </div>
   </div>
 </template>

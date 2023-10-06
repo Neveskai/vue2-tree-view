@@ -31,7 +31,7 @@
 <script>
 import ModalVue from '@/components/Modal/Modal.vue'
 import SelectVue from '@/components/VueSelect/VueSelect.vue'
-import { tree, flatten, extractChildren } from '@/__mocks__/TableTree'
+import { flatten, extractChildren } from '@/__mocks__/TableTree'
 
 export default {
   name: 'MoveNode',
@@ -46,6 +46,7 @@ export default {
       options: [],
     }
   },
+  inject: ['tree'],
   computed: {
     modal() {
       return this.$refs.modal
@@ -62,7 +63,7 @@ export default {
     open(nodeToMove) {
       this.nodeToMove = nodeToMove
       this.options = flatten(
-        extractChildren({ children: tree }),
+        extractChildren({ children: this.tree }),
         extractChildren,
         this.nodeToMove
       )

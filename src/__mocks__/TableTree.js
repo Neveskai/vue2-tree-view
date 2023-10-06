@@ -13,15 +13,22 @@ export const uuid = length => {
 }
 
 export const flatten = (children, extractChildren, originOfMove = null) => {
-  if (originOfMove)
-    children = children.filter(node => node.id !== originOfMove.id)
+  if (originOfMove) {
+    children = children.filter(node => node.id !== originOfMove.id) // Remove yourself and your children
+  }
 
-  return Array.prototype.concat.apply(
+  let nodes = Array.prototype.concat.apply(
     children,
     children?.map(x =>
       flatten(extractChildren(x) || [], extractChildren, originOfMove)
     )
   )
+
+  if (originOfMove) {
+    nodes = nodes.filter(node => node.id !== originOfMove._parent.id) // Remove your parent
+  }
+
+  return nodes
 }
 
 export const extractChildren = x =>
