@@ -13,8 +13,8 @@ yarn start
 ### Demo
 
 ```
-https://vue2-tree-view.vercel.app/
+[DEMO](https://vue2-tree-view.vercel.app/)
 ```
 ```
-https://drive.google.com/file/d/1KiUKF5lxKgnLFsS8xJ20_-wplGVwsiDp/view?usp=sharing
+[VIDEO DEMO](https://drive.google.com/file/d/1KiUKF5lxKgnLFsS8xJ20_-wplGVwsiDp/view?usp=sharing)
 ```
