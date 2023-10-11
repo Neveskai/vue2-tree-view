@@ -7,12 +7,11 @@ click in some option,
 fill the form and submit
 and see the UI update
 
-## Demo
 [DEMO](https://vue2-tree-view.vercel.app/)
 
 [VIDEO DEMO](https://drive.google.com/file/d/1KiUKF5lxKgnLFsS8xJ20_-wplGVwsiDp/view?usp=sharing)
 
-## Run Locally
+### Run Locally
 ```
 yarn install
 yarn start
